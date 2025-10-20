@@ -28,4 +28,4 @@ ou
 
 cria um navegador forçadamente
 
--npx prisma generate
+- npx prisma generate
