@@ -29,3 +29,9 @@ export const create = async (data) => {
     })
 
 }
+
+export const deleteBruxo = async (id) => {
+    return await prisma.bruxo.delete({
+        where: { id: Number(id)}
+    });
+}
