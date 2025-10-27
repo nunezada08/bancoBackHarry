@@ -58,3 +58,42 @@ export const buscarBruxoPorId = async (req,res) => {
         })
     }
 }
+
+export const criarBruxo = async (req, res) => {
+    try {
+        const { nome, casa, patrono, varinha, anoMatricula } = req.body;
+
+        const dado = req.body;
+
+        const camposObrigatorios = ['nome', 'casa', 'varinha', 'anoMatricula'];
+
+        const faltando = camposObrigatorios.filter(campo => !dado[campo]);
+
+        if (faltando.length > 0) {
+            return res.status(400).json({
+                erro: `Os seguintes campos são obrigatórios: ${faltando.join(', ')}.`
+            });
+        }
+
+        const casasValidas = ['Grifinória', 'Sonserina', 'Corvinal', 'Lufa-Lufa'];
+        if (!casasValidas.includes(casa)) {
+            return res.status(400).json({
+                erro: `Casa inválida.`,
+                casasValidas
+            })
+        }
+
+        const novoBruxo = await bruxoModel.create(dado);
+
+    res.status(201).json({
+        mensagem: 'Novo bruxo criado com sucesso.',
+        bruxo: novoBruxo
+    })
+
+    } catch (error) {
+        res.status(500).json({
+            erro: 'Erro ao criar novo bruxo.',
+            detalhes: error.message
+        })
+    }
+}
