@@ -7,5 +7,7 @@ router.get("/", BruxoController.listarTodosBruxos);
 router.get("/:id", BruxoController.buscarBruxoPorId);
 router.post("/", BruxoController.criarBruxo);
 router.delete("/:id", BruxoController.apagar);
+router.put("/:id", BruxoController.atualizar);
+
 
 export default router;
